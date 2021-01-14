@@ -14,7 +14,7 @@ const userRoutes = (data, cb) => {
 };
 
 // route: POST /users
-// required data: xxx
+// required data: name, email, streetAddress, password
 // optional data: none
 // auth required: no
 _routes.post = userController.createNew;
