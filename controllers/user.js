@@ -30,8 +30,6 @@ userController.createNew = (data, cb) => {
       ? data.payload.password.trim()
       : false;
 
-  console.log({ name, email, streetAddress, password });
-
   if (name && email && streetAddress && password) {
     const hashedPwd = hashStr(password);
 
@@ -57,6 +55,68 @@ userController.createNew = (data, cb) => {
     }
   } else {
     cb(400, { Error: "Missing required fields" });
+  }
+};
+
+userController.update = (data, cb) => {
+  // check required data
+  const email =
+    typeof data.payload.email == "string" &&
+    data.payload.email.trim().length > 0
+      ? data.payload.email.trim()
+      : false;
+
+  // check optional data
+  const name =
+    typeof data.payload.name == "string" && data.payload.name.trim().length > 0
+      ? data.payload.name.trim()
+      : false;
+
+  const streetAddress =
+    typeof data.payload.streetAddress == "string" &&
+    data.payload.streetAddress.trim().length > 0
+      ? data.payload.streetAddress.trim()
+      : false;
+
+  const password =
+    typeof data.payload.password == "string" &&
+    data.payload.password.trim().length >= 6
+      ? data.payload.password.trim()
+      : false;
+
+  if (!email) {
+    cb(400, { Error: "Missing required fields" });
+  } else if (!name && !streetAddress && !password) {
+    cb(400, { Error: "Missing fields to update" });
+  } else {
+    // fetch user
+    _data
+      .read("users", email)
+      .then((user) => {
+        console.log(user);
+
+        if (name) user.name = name;
+        if (streetAddress) user.streetAddress = streetAddress;
+        if (password) {
+          const hashedPwd = hashStr(password);
+          user.password = hashedPwd;
+        }
+
+        // update on storage
+        _data
+          .update("users", email, user)
+          .then((updatedUser) => {
+            cb(200, updatedUser);
+          })
+          .catch((err) => {
+            console.log(err);
+            cb(500, { Error: err.message });
+          });
+      })
+      .catch((err) => {
+        console.log(err);
+        cb(500, { Error: err.message });
+      });
   }
 };
 

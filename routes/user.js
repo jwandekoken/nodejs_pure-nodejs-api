@@ -19,4 +19,10 @@ const userRoutes = (data, cb) => {
 // auth required: no
 _routes.post = userController.createNew;
 
+// route: PUT /users
+// required data: email
+// optional data: name, streetAddress, password (at least one must be provided)
+// auth required: no
+_routes.put = userController.update;
+
 module.exports = userRoutes;
