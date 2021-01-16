@@ -120,4 +120,42 @@ userController.update = (data, cb) => {
   }
 };
 
+userController.fetch = (data, cb) => {
+  // check required data
+  const email =
+    typeof data.queryStringObject.email == "string" &&
+    data.queryStringObject.email.trim().length > 0
+      ? data.queryStringObject.email.trim()
+      : false;
+
+  _data
+    .read("users", email)
+    .then((user) => {
+      cb(200, user);
+    })
+    .catch((err) => {
+      console.log(err);
+      cb(404, { Error: "User not found" });
+    });
+};
+
+userController.delete = (data, cb) => {
+  // check required data
+  const email =
+    typeof data.queryStringObject.email == "string" &&
+    data.queryStringObject.email.trim().length > 0
+      ? data.queryStringObject.email.trim()
+      : false;
+
+  _data
+    .delete("users", email)
+    .then(() => {
+      cb(200, { Msg: "User deleted" });
+    })
+    .catch((err) => {
+      console.log(err);
+      cb(500, { Error: err.message });
+    });
+};
+
 module.exports = userController;
