@@ -22,8 +22,7 @@ _routes.post = userController.createNew;
 // route: PUT /users
 // required data: email
 // optional data: name, streetAddress, password (at least one must be provided)
-// auth required: no (EDIT HERE)
-// @TODO: only let logged users update their own data
+// auth required: yes
 _routes.put = userController.update;
 
 // route: GET /users
@@ -35,8 +34,7 @@ _routes.get = userController.fetch;
 // route: DELETE /users
 // required data: email
 // optional data: none
-// auth required: no (EDIT HERE)
-// @TODO: only let logged users delete their own data
+// auth required: yes
 _routes.delete = userController.delete;
 
 module.exports = userRouter;

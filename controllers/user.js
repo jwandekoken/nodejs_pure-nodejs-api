@@ -1,5 +1,6 @@
 const _data = require("../lib/data");
 const hashStr = require("../lib/hashStr");
+const verifyAuth = require("../lib/verifyAuth");
 
 const userController = {};
 
@@ -89,33 +90,45 @@ userController.update = (data, cb) => {
   } else if (!name && !streetAddress && !password) {
     cb(400, { Error: "Missing fields to update" });
   } else {
-    // fetch user
-    _data
-      .read("users", email)
-      .then((user) => {
-        console.log(user);
+    // check auth
+    verifyAuth(data, email)
+      .then((isLogged) => {
+        if (isLogged) {
+          // fetch user
+          _data
+            .read("users", email)
+            .then((user) => {
+              console.log(user);
 
-        if (name) user.name = name;
-        if (streetAddress) user.streetAddress = streetAddress;
-        if (password) {
-          const hashedPwd = hashStr(password);
-          user.password = hashedPwd;
+              if (name) user.name = name;
+              if (streetAddress) user.streetAddress = streetAddress;
+              if (password) {
+                const hashedPwd = hashStr(password);
+                user.password = hashedPwd;
+              }
+
+              // update on storage
+              _data
+                .update("users", email, user)
+                .then((updatedUser) => {
+                  cb(200, updatedUser);
+                })
+                .catch((err) => {
+                  console.log(err);
+                  cb(500, { Error: err.message });
+                });
+            })
+            .catch((err) => {
+              console.log(err);
+              cb(500, { Error: err.message });
+            });
+        } else {
+          cb(403, { Error: "Access denied" });
         }
-
-        // update on storage
-        _data
-          .update("users", email, user)
-          .then((updatedUser) => {
-            cb(200, updatedUser);
-          })
-          .catch((err) => {
-            console.log(err);
-            cb(500, { Error: err.message });
-          });
       })
       .catch((err) => {
         console.log(err);
-        cb(500, { Error: err.message });
+        cb(403, { Error: err.message });
       });
   }
 };
@@ -147,15 +160,27 @@ userController.delete = (data, cb) => {
       ? data.queryStringObject.email.trim()
       : false;
 
-  _data
-    .delete("users", email)
-    .then(() => {
-      cb(200, { Msg: "User deleted" });
-    })
-    .catch((err) => {
-      console.log(err);
-      cb(500, { Error: err.message });
-    });
+  if (email) {
+    verifyAuth(data, email)
+      .then((isLogged) => {
+        if (isLogged) {
+          _data
+            .delete("users", email)
+            .then(() => {
+              cb(200, { Msg: "User deleted" });
+            })
+            .catch((err) => {
+              console.log(err);
+              cb(500, { Error: err.message });
+            });
+        }
+      })
+      .catch((err) => {
+        cb(403, { Error: err.message });
+      });
+  } else {
+    cb(400, { Error: "Missing required field" });
+  }
 };
 
 module.exports = userController;

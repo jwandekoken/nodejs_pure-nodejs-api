@@ -19,26 +19,10 @@ const authRouter = (data, cb) => {
 // auth required: no
 _routes.post = authController.login;
 
-/*
-// route: PUT /users
-// required data: email
-// optional data: name, streetAddress, password (at least one must be provided)
-// auth required: no (EDIT HERE)
-// @TODO: only let logged users update their own data
-_routes.put = userController.update;
-
-// route: GET /users
-// required data: email
+// route: DELETE /auth
+// required data: id
 // optional data: none
 // auth required: no
-_routes.get = userController.fetch;
-
-// route: DELETE /users
-// required data: email
-// optional data: none
-// auth required: no (EDIT HERE)
-// @TODO: only let logged users delete their own data
-_routes.delete = userController.delete;
-*/
+_routes.delete = authController.delete;
 
 module.exports = authRouter;

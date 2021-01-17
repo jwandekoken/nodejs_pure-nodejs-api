@@ -62,4 +62,39 @@ authController.login = (data, cb) => {
   }
 };
 
+authController.delete = (data, cb) => {
+  // check that the id is valid
+  const id =
+    typeof data.queryStringObject.id == "string" &&
+    data.queryStringObject.id.trim().length == 25
+      ? data.queryStringObject.id.trim()
+      : false;
+
+  if (id) {
+    _data
+      .read("tokens", id)
+      .then((tokenData) => {
+        if (!tokenData) {
+          return cb(403, { Error: "Could not find the specified token" });
+        }
+
+        _data
+          .delete("tokens", id)
+          .then(() => {
+            cb(200, { deletedToken: tokenData });
+          })
+          .catch((err) => {
+            console.log(err);
+            cb(500, { Error: "Could not delete the specified token" });
+          });
+      })
+      .catch((err) => {
+        console.log(err);
+        cb(400, { Error: "Could not find the specified token" });
+      });
+  } else {
+    cb(400, { Error: "Missing required field" });
+  }
+};
+
 module.exports = authController;
