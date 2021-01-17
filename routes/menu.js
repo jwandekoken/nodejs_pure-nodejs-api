@@ -13,8 +13,8 @@ const menuRouter = (data, cb) => {
   }
 };
 
-// route: GET /auth
-// required data: none
+// route: GET /menu
+// required data: email
 // optional data: none
 // auth required: yes
 _routes.get = menuController.showMenu;
