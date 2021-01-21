@@ -18,12 +18,12 @@ menuController.showMenu = (data, cb) => {
             {
               id: "01",
               name: "Pepperoni",
-              value: "33.00",
+              value: 33.0,
             },
             {
               id: "02",
               name: "BBQ Chicken",
-              value: "32.00",
+              value: 32.0,
             },
           ];
 
@@ -41,8 +41,6 @@ menuController.showMenu = (data, cb) => {
   } else {
     cb(400, { Error: "Missing required field" });
   }
-
-  verifyAuth(data);
 };
 
 module.exports = menuController;
