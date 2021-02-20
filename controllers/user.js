@@ -5,8 +5,6 @@ const verifyAuth = require("../lib/verifyAuth");
 const userController = {};
 
 userController.createNew = (data, cb) => {
-  console.log("data", data);
-
   // check required data
   const name =
     typeof data.payload.name == "string" && data.payload.name.trim().length > 0
@@ -98,8 +96,6 @@ userController.update = (data, cb) => {
           _data
             .read("users", email)
             .then((user) => {
-              console.log(user);
-
               if (name) user.name = name;
               if (streetAddress) user.streetAddress = streetAddress;
               if (password) {

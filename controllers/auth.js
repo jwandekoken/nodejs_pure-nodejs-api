@@ -5,8 +5,6 @@ const createRandomString = require("../lib/createRandomStr");
 const authController = {};
 
 authController.login = (data, cb) => {
-  console.log("data", data);
-
   // check required data
   const email =
     typeof data.payload.email == "string" &&
