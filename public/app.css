@@ -1,4 +1,13 @@
 /* 
+* Reset defaults
+*
+*/
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* 
 * Navigation
 *
 */
@@ -55,10 +64,72 @@
 }
 
 /* 
+* Footer
+*
+*/
+.footer {
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(245, 245, 245);
+  border: 1px solid rgb(196, 196, 196);
+}
+
+/* 
+* Form elements
+*
+*/
+.formInput {
+  padding: 10px;
+  margin-bottom: 25px;
+}
+
+.formLabel {
+  margin-bottom: 5px;
+}
+
+.formButton {
+  padding: 13px 32px;
+}
+
+/* 
 * Home
 *
 */
-.homeContentWrapper {
-  border: 1px solid red;
-  min-height: 400px;
+.home__ContentWrapper {
+  /*border: 1px solid red;*/
+  padding-top: 20px;
+  padding-bottom: 40px;
+}
+
+.home__titleWrapper {
+  /*border: 1px solid red;*/
+  text-align: center;
+}
+
+.home__pageTitle {
+  font-weight: 400;
+  letter-spacing: 2px;
+  margin-top: 0;
+}
+
+.home__leadText {
+  font-size: 21px;
+}
+
+.home__formWrapper {
+  /*border: 1px solid red;*/
+}
+
+.home__formTitle {
+  text-align: center;
+}
+
+.home__registerForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

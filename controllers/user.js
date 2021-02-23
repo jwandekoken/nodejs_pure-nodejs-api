@@ -5,6 +5,8 @@ const verifyAuth = require("../lib/verifyAuth");
 const userController = {};
 
 userController.createNew = (data, cb) => {
+  console.log(data.payload);
+
   // check required data
   const name =
     typeof data.payload.name == "string" && data.payload.name.trim().length > 0
