@@ -1,1 +1,1 @@
-NodeJS API made from stratch, without any dependencies, without NPM
+NodeJS API made from stratch, with a template system, without any third party dependence
