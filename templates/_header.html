@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- General settings -->
+      <meta charset="UTF-8" />
+      <meta http-equiv="content-language" content="en-us">
+      <!-- this base tag ensures that all urls have as base
+      the url specified here -->
+      <base href="{global.baseUrl}" />
+    <!--Meta Tags-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta name="description" content="{head.description}" />
+      <title>{head.title} | {global.appName}</title>
+
+    <!--Static Assets -->
+      <link type="image/x-icon" rel="icon" href="favicon.ico" />
+      <script type="text/javascript" charset="utf-8" src="public/app.js"></script> 
+      <link rel="stylesheet" type="text/css" href="public/app.css" />
+  </head>
+  <body>
+    <!-- Page Wrapper -->
+    <div class="wrapper">
+
+      <!-- Header -->
+      <div class="header">
+        <!-- Logo -->
+        <a href="/" class="logoLink">
+          <img src="public/logopizza.png" class="logoImg" alt="logo" />
+        </a>
+        <!--Navigation -->
+        <ul class="menu">
+          <li>
+            <a href="/">Home</a>
+          </li>
+          <li class="loggedOut">
+            <a  href="/account/create">Signup</a>
+          </li>
+          <li class="loggedOut">
+            <a href="/session/create">Login</a>
+          </li>
+          <li class="loggedIn">
+            <a href="/checks/all">Dashboard</a>
+          </li>
+          <li class="loggedIn">
+            <a href="/account/edit">Account Settings</a>
+          </li>
+          <li class="loggedIn">
+            <a href="#" id="logoutButton">Logout</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Page-specific Content -->
+      <div class="content">
+  </body>
+</html>

@@ -1,0 +1,64 @@
+/* 
+* Navigation
+*
+*/
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+}
+
+.logoLink {
+  text-decoration: none;
+}
+
+.logoImg {
+  width: 50px;
+}
+
+.menu {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.menu li {
+  padding: 10px;
+  display: flex;
+}
+
+.menu li a {
+  margin: auto 0;
+  color: #000;
+  text-decoration: none;
+}
+
+.menu li a:link {
+  color: #000;
+  text-decoration: none;
+}
+
+.menu li a:visited {
+  color: #000;
+  text-decoration: none;
+}
+
+.menu li a:hover {
+  color: #000;
+  text-decoration: none;
+}
+
+.menu li a:active {
+  color: #000;
+  text-decoration: none;
+}
+
+/* 
+* Home
+*
+*/
+.homeContentWrapper {
+  border: 1px solid red;
+  min-height: 400px;
+}
